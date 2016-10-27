@@ -97,7 +97,13 @@ function (Ember, $, I18n, template) {
 			if (includeTimezoneOffset !== true) {
 				return datetime;
 			}
-			var offset = new Date().getTimezoneOffset(),
+			var dateTimeForOffset = $.fn.datetimepicker.DPGlobal.formatDate(
+				date,
+				$.fn.datetimepicker.DPGlobal.parseFormat('m d, Y H:i:s', 'php'),
+				'en',
+				'php'
+			);
+			var offset = new Date(dateTimeForOffset).getTimezoneOffset(),
 				timezone = (offset < 0 ? '+' : '-') + pad(parseInt(Math.abs(offset / 60)), 2) + ':' + pad(Math.abs(offset % 60), 2);
 			return datetime + timezone;
 		},
